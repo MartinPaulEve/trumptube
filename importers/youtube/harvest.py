@@ -1,7 +1,7 @@
 from googleapiclient.discovery import build
 import json
 import os.path
-
+from YTparser import YouTubeParser
 
 class Harvester():
     def __init__(self):
@@ -56,8 +56,11 @@ if __name__ == "__main__":
 
             fname = "output/{0}.json".format(video_id)
 
+            str_out = ""
+
             if os.path.isfile(fname):
-               print("Skipping {0} as it already exists.".format(fname))
+                json = json.load(open(fname, "r"))
+                print("Skipping {0} as it already exists.".format(fname))
             else:
                 print("Harvesting into {0}.".format(fname))
                 results = harvester.get_comment_threads(video_id)
@@ -66,7 +69,16 @@ if __name__ == "__main__":
                 json_out['thread'] = results
 
                 for res in results:
+                    str_out = str_out + " " + res["snippet"]["topLevelComment"]["snippet"]["textDisplay"]
                     json_out[res['id']] = harvester.get_comments(res['id'])
+
+                    for sub_res in json_out[res['id']]:
+                        str_out = str_out + " " + sub_res["snippet"]["textDisplay"]
 
                 with open(fname, "w") as json_writer:
                     json_writer.write(json.dumps(json_out, ensure_ascii=False))
+
+            # now pass this to the parser
+            yt = YouTubeParser()
+
+            yt.parse(str_out)
