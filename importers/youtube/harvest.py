@@ -81,4 +81,4 @@ if __name__ == "__main__":
             # now pass this to the parser
             yt = YouTubeParser()
 
-            yt.parse(str_out)
+            yt.parse(str_out, "output/{0}.csv".format(video_id))

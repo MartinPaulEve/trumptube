@@ -8,7 +8,7 @@ class YouTubeParser():
     def __init__(self):
         pass
 
-    def parse(self, text):
+    def parse(self, text, fname):
         tokenizer = RegexpTokenizer(r'\w+')
         allWords = tokenizer.tokenize(text)
         allWordDist = nltk.FreqDist(w.lower() for w in allWords)
