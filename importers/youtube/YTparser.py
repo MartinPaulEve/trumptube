@@ -23,7 +23,7 @@ class YouTubeParser():
             print(occurrences)
 
 
-        with open('output/out.csv', 'w', newline='') as fp:
+        with open(fname, 'w', newline='') as fp:
             a = csv.writer(fp, delimiter=',')
             data = mostCommon
             a.writerows(data)
