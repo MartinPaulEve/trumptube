@@ -1,12 +1,12 @@
 from flask import Flask
+from flask import render_template
 
-app = Flask(__name__)
+# set static folder
+app = Flask(__name__, static_url_path='/static')
 
+@app.route("/")
+def trumptube():
+    return render_template('index.html')
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()

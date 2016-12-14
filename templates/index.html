@@ -52,9 +52,7 @@ text {
 <body>
 <h1>TrumpTube</h1>
 
-<p>As many of us have recognized, it's time for us to <a href="http://www.motherjones.com/politics/2016/12/fight-like-hell-trump-racism-fake-news">fight like hell</a> to resist the rise of <span style="text-decoration: line-through;">trumpism</span> fascism in the US, and join the ranks of the ongoing global fight. For our digital humanities communities we ask can we fight using our own domain expertise. Although one of our best long term strategies is to continue the archival and narrative work addressing the schewed vision of our pasts in the archive and the scholarly record—as we defend the very institutions that support that recent work at MITH on a <a href="http://mith.umd.edu/research/night-against-hate/" target="_blank">Night Against Hate</a> reminds us, we could work together on immediate, rapid, direct actions.</p>
-
-<p>TrumpTube is an attempt at rapid prototyping a useful framework for beginning our interpretations of the trolling phenomenon. For this particular example we went to the belly of the YouTube beast to extract language from the comment sections and begin the work of distant reading. We chose the Bubble Chart below for its simplicity in order to highlight the framework itself. The chart is formed from the top-50 most commonly used words in one single YouTube video (insert video here).</p>
+<p>As <a href="http://mith.umd.edu/research/night-against-hate/" target="_blank">many of us</a> have recognized, it's time for us to <a href="http://www.motherjones.com/politics/2016/12/fight-like-hell-trump-racism-fake-news">fight like hell</a> to resist the rise of <span style="text-decoration: line-through;">trumpism</span> fascism in the US, and join the ranks of the ongoing global fight. TrumpTube is an attempt at rapid prototyping a useful framework for beginning our interpretations of the trolling phenomenon. For this particular example we went to the belly of the YouTube beast to extract language from the comment sections and begin the work of distant reading. We chose the Bubble Chart below for its simplicity in order to highlight the framework itself. The chart is formed from the top-50 most commonly used words in one single YouTube video (insert video here).</p>
 
 <p>This rapid prototype is our closing exercise for a 3 day experiment in rapid prototyping sponsored by <a href="http://xpmethod.plaintext.in/">Columbia's Group for Experimental Methods in the Humanities</a> (#xpemthod) and <a href="http://www.ctp.bbk.ac.uk/" target="_blank">The Birbeck Center for Technology and Publishing</a>, held at the <a href="https://studio.cul.columbia.edu/" target="_blank">Studio@Butler</a> at Columbia University Libraries in New York City. On Monday, December 12, we built tests to help some of our #xpmethod graduate students on something we're calling Middlematch (you'll see). Yesterday we made Cemmento—A sort of #mincomp solution to the age-old problem of connecting your annotations to a "canonical" document on the internet. Today we leave you with TrumpTube. Hope it helps.</p>
 
@@ -76,7 +74,7 @@ var pack = d3.pack()
     .size([width, width])
     .padding(1.5);
 
-d3.csv("{{ url_for('static', filename='flare.csv') }}", function(d) {
+d3.csv("{{ url_for('static', filename='trumptube.csv') }}", function(d) {
   d.value = +d.value;
   if (d.value) return d;
 }, function(error, classes) {
