@@ -1,32 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Hello from Flask</title>
-    <stile>
+    <meta charset="utf-8">
+    <title>TrumpTube</title>
+    <style>
 
-    </stile>
-    <script src="//d3js.org/d3.v2.min.js" charset="utf-8"></script>
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  color: #454545;
+  background-color: #fff;
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+   margin: 2rem;
+}
+
+h1 {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  margin-bottom: .5rem;
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: #404040;
+  letter-spacing: -.025rem;
+  line-height: 1.25;
+  text-rendering: optimizeLegibility;
+}
+
+p {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size:1.2rem;
+  line-height: 1.5;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+svg {
+  margin-top:2rem;
+}
+text {
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+    </style>
 </head>
-<body>
-{% if name %}
-  <h1>Hello {{ name }}!</h1>
-{% else %}
-  <h1>Hello, World!</h1>
-{% endif %}
 
+<body>
 <h1>TrumpTube</h1>
 
+<p>As many of us have recognized, it's time for us to <a href="http://www.motherjones.com/politics/2016/12/fight-like-hell-trump-racism-fake-news">fight like hell</a> to resist the rise of <span style="text-decoration: line-through;">trumpism</span> fascism in the US, and join the ranks of the ongoing global fight. For our digital humanities communities we ask can we fight using our own domain expertise. Although one of our best long term strategies is to continue the archival and narrative work addressing the schewed vision of our pasts in the archive and the scholarly record—as we defend the very institutions that support that recent work at MITH on a <a href="http://mith.umd.edu/research/night-against-hate/" target="_blank">Night Against Hate</a> reminds us, we could work together on immediate, rapid, direct actions.</p>
 
-<p>Order: <select id="order">
-  <option value="name">by Name</option>
-  <option value="count">by Frequency</option>
-  <option value="group">by Cluster</option>
-</select>
+<p>TrumpTube is an attempt at rapid prototyping a useful framework for beginning our interpretations of the trolling phenomenon. For this particular example we went to the belly of the YouTube beast to extract language from the comment sections and begin the work of distant reading. We chose the Bubble Chart below for its simplicity in order to highlight the framework itself. The chart is formed from the top-50 most commonly used words in one single YouTube video (insert video here).</p>
 
-<p>This is a test</p>
+<p>This rapid prototype is our closing exercise for a 3 day experiment in rapid prototyping sponsored by <a href="http://xpmethod.plaintext.in/">Columbia's Group for Experimental Methods in the Humanities</a> (#xpemthod) and <a href="http://www.ctp.bbk.ac.uk/" target="_blank">The Birbeck Center for Technology and Publishing</a>, held at the <a href="https://studio.cul.columbia.edu/" target="_blank">Studio@Butler</a> at Columbia University Libraries in New York City. On Monday, December 12, we built tests to help some of our #xpmethod graduate students on something we're calling Middlematch (you'll see). Yesterday we made Cemmento—A sort of #mincomp solution to the age-old problem of connecting your annotations to a "canonical" document on the internet. Today we leave you with TrumpTube. Hope it helps.</p>
+
 <p>Built with <a href="http://d3js.org/">d3.js</a>.
 
+<svg width="960" height="880"></svg>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 
 var svg = d3.select("svg"),
@@ -39,7 +75,8 @@ var color = d3.scaleOrdinal(d3.schemeCategory20c);
 var pack = d3.pack()
     .size([width, width])
     .padding(1.5);
-d3.csv("{{ url_for('static', filename='trump2.csv') }}", function(d) {
+
+d3.csv("{{ url_for('static', filename='flare.csv') }}", function(d) {
   d.value = +d.value;
   if (d.value) return d;
 }, function(error, classes) {
@@ -84,6 +121,7 @@ d3.csv("{{ url_for('static', filename='trump2.csv') }}", function(d) {
   node.append("title")
       .text(function(d) { return d.id + "\n" + format(d.value); });
 });
+
 </script>
 
 </body>
