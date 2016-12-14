@@ -1,5 +1,7 @@
 import nltk
 import csv
+from nltk.tokenize import RegexpTokenizer
+
 
 class YouTubeParser():
 
@@ -7,7 +9,8 @@ class YouTubeParser():
         pass
 
     def parse(self, text):
-        allWords = nltk.tokenize.word_tokenize(text)
+        tokenizer = RegexpTokenizer(r'\w+')
+        allWords = tokenizer.tokenize(text)
         allWordDist = nltk.FreqDist(w.lower() for w in allWords)
 
         stopwords = nltk.corpus.stopwords.words('english')
